@@ -74,11 +74,11 @@ export class GuildBucket {
 
         // Run the query
         if (exists) {
-            await Database.run('UPDATE guilds SET settings = ? WHERE id = ?', json, this.id);
+            // await Database.run('UPDATE guilds SET settings = ? WHERE id = ?', json, this.id);
         }
         else {
             this.rowExists = true;
-            await Database.run('INSERT INTO guilds (id, settings) VALUES (?, ?)', this.id, json);
+            // await Database.run('INSERT INTO guilds (id, settings) VALUES (?, ?)', this.id, json);
         }
     }
 
