@@ -83,7 +83,7 @@ export class Race extends Command {
         // Start a new race
         let race = this.races[input.channel.id] = {
             started: false,
-            startTime: _.now() + 30000,
+            startTime: _.now() + 15000,
             events: [],
             members: [
                 {
