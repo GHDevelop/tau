@@ -41,7 +41,7 @@ export class Roulette extends Command {
         let reservation = Betting.reserve(input.channel);
 
         // Pick where the wheel will spin to
-        let landingTileIndex = await randomNumber(0, 14);
+        let landingTileIndex = 3;//await randomNumber(0, 14);
         let landingTileNumber = tiles[landingTileIndex];
         let spunWheel = await this.generateRotatedWheel(landingTileIndex * 24 + 12);
 
@@ -50,7 +50,7 @@ export class Roulette extends Command {
 
         // Send countdown
         let startTime = _.now();
-        let countdownMessage = await input.channel.send(`_ _\n${Emoji.LOADING}  **Spinning** in 30 seconds...`) as Message;
+        let countdownMessage = await input.channel.send(`_ _\n${Emoji.LOADING}  **Spinning** in 20 seconds...`) as Message;
 
         // Listen for bets
         let bets : {[id: string]: Bet} = {};
@@ -209,11 +209,11 @@ export class Roulette extends Command {
 
     private async countdown(message: Message, start: number) {
         let elapsed = (_.now() - start) / 1000;
-        let remaining = Math.ceil(30 - elapsed);
+        let remaining = Math.ceil(20 - elapsed);
 
         let fn = async () => {
             elapsed = (_.now() - start) / 1000;
-            remaining = Math.ceil(30 - elapsed);
+            remaining = Math.ceil(20 - elapsed);
 
             if (remaining > 0) {
                 await message.edit(`_ _\n${Emoji.LOADING}  **Spinning** in ${remaining} seconds...`);
