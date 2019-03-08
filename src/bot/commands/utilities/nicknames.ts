@@ -20,6 +20,7 @@ export class Nicknames extends Command {
 
     execute(input: Input) {
         let target = input.getArgument('user') as GuildMember;
+        console.log(target);
 
         let result = '';
         input.member.settings.nameHistory.forEach(record => {
