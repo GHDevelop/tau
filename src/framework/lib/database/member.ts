@@ -10,7 +10,7 @@ export class MemberBucket {
     /**
      * The balance of the member.
      */
-    public currency: number = 0;
+    public currency: number = 100;
 
     /**
      * An array of inventory items the user owns.
@@ -20,7 +20,7 @@ export class MemberBucket {
     /**
      * The current level of the member.
      */
-    public level: number = 1;
+    public level: number = 10;
 
     /**
      * The current experience points of the member.
