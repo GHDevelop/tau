@@ -20,10 +20,9 @@ export class Nicknames extends Command {
 
     execute(input: Input) {
         let target = input.getArgument('user') as GuildMember;
-        console.log(target);
 
         let result = '';
-        input.member.settings.nameHistory.forEach(record => {
+        target.settings.nameHistory.forEach(record => {
             let timeAgo = _.now() - record.time;
             let m = moment(record.time);
             let isThisYear = (m.format('YYYY') === moment().format('YYYY'));
@@ -36,9 +35,10 @@ export class Nicknames extends Command {
             result += timestamp + '\n';
         });
 
-        if (input.member.settings.nameHistory.length <= 0) {
+        if (target.settings.nameHistory.length <= 0) {
             result = "None";
         }
+
         input.channel.send({
             embed: {
                 color: 3447003,
