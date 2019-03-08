@@ -15,7 +15,6 @@ export class Pay extends Command {
                     required: true,
                     eval: (input, args, message) => {
                         if (message.member == (input as GuildMember)) return false;
-                        if ((input as GuildMember).user.bot) return false;
                         return true;
                     }
                 },
