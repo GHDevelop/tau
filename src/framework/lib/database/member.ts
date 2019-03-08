@@ -1,4 +1,5 @@
 import { Database } from "../database";
+import { Framework } from "@core/framework";
 
 export class MemberBucket {
     protected id: string;
@@ -85,6 +86,10 @@ export class MemberBucket {
                 delete o[key];
             }
         });
+
+        // Stop here if this is a bot
+        let user = Framework.getClient().users.get(this.id);
+        if (user && user.bot) return;
 
         // Encode with JSON
         let json = JSON.stringify(o, null, 4);
