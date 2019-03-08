@@ -2,6 +2,7 @@ import { Command, Input } from '@api';
 import { GuildMember } from 'discord.js';
 import { TextChannel } from 'discord.js';
 import { Message } from 'discord.js';
+import { Emoji } from '@bot/libraries/emoji';
 
 export class Quote extends Command {
     constructor() {
@@ -54,7 +55,8 @@ export class Quote extends Command {
                             time: _.now(),
                             message: quote
                         });
-                        input.channel.send('**[' + (db.quotes.length).toString() + ']** - ' + quote + ' —' + user.displayName);
+                        input.channel.send(`${Emoji.SUCCESS}  Quote saved.`);
+                        // input.channel.send('**[' + (db.quotes.length).toString() + ']** - ' + quote + ' —' + user.displayName);
                     } else {
                         input.channel.send("No quote to add");
                     }
@@ -100,17 +102,19 @@ export class Quote extends Command {
                     if (user) {
                         let userQuotes = _.filter(db.quotes, function(o) { return o.memberId == (user as GuildMember).id; })
                         let id = _.random(0, _.size(userQuotes)-1);
-                        input.channel.send('**[' + (db.quotes.indexOf(userQuotes[id])+1).toString() + ']** - ' + userQuotes[id].message + ' —' + user.displayName);
+                        input.channel.send(`${Emoji.SUCCESS}  Quote saved.`);
+                        // input.channel.send('**[' + (db.quotes.indexOf(userQuotes[id])+1).toString() + ']** - ' + userQuotes[id].message + ' —' + user.displayName);
                     //from all users
                     } else {
                         let id = _.random(0, _.size(db.quotes)-1);
                         let member: string;
                         if (input.guild.member(db.quotes[id].memberId)) {
-                            member = input.guild.member(db.quotes[id].memberId).displayName;
+                            member = input.guild.member(db.quotes[id].memberId).toString();
                         } else {
                             member = "Anonymous";
                         }
-                        input.channel.send('**[' + (id+1).toString() + ']** - ' + db.quotes[id].message + ' —' + member);
+                        input.channel.send(`"${db.quotes[id].message}" – ${member}`);
+                        // input.channel.send('**[' + (id+1).toString() + ']** - ' + db.quotes[id].message + ' —' + member);
                     }
                 } else {
                     input.channel.send('No quotes saved.');
